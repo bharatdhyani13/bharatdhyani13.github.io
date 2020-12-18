@@ -271,6 +271,15 @@ input, select, textarea {
 		margin: 3rem 0;
 	}
 
+	video:hover{
+		-ms-transform: scale(1.1); /* IE 9 */
+		-webkit-transform: scale(1.1); /* Safari 3-8 */
+		transform: scale(1.1);
+		
+	}
+
+	video{transition: transform 0.2s ease-out;}
+
 		hr.major {
 			margin: 5rem 0;
 		}
