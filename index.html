@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Dhyani - ML Engineer & Data Scientist Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #151a3d;
+            --accent-blue: #00d4ff;
+            --accent-purple: #b794f6;
+            --accent-green: #00ff88;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --gradient-1: linear-gradient(135deg, #00d4ff 0%, #b794f6 100%);
+            --gradient-2: linear-gradient(135deg, #b794f6 0%, #00ff88 100%);
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(30deg, var(--accent-blue) 12%, transparent 12.5%, transparent 87%, var(--accent-blue) 87.5%, var(--accent-blue)),
+                linear-gradient(150deg, var(--accent-blue) 12%, transparent 12.5%, transparent 87%, var(--accent-blue) 87.5%, var(--accent-blue)),
+                linear-gradient(30deg, var(--accent-blue) 12%, transparent 12.5%, transparent 87%, var(--accent-blue) 87.5%, var(--accent-blue)),
+                linear-gradient(150deg, var(--accent-blue) 12%, transparent 12.5%, transparent 87%, var(--accent-blue) 87.5%, var(--accent-blue));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeIn 1s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.5s backwards;
+        }
+
+        .contact-links a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border: 1px solid var(--accent-blue);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-links a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+            z-index: -1;
+        }
+
+        .contact-links a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .contact-links a:hover {
+            color: var(--bg-primary);
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(21, 26, 61, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-1);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: rgba(21, 26, 61, 0.6);
+            border: 1px solid rgba(183, 148, 246, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-2);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .project-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 15px 40px rgba(183, 148, 246, 0.3);
+        }
+
+        .project-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-family: 'Space Mono', monospace;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .project-company {
+            color: var(--accent-green);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-highlights {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-highlights li {
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            margin-bottom: 0.7rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .project-highlights li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-size: 1.2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-badge {
+            background: rgba(183, 148, 246, 0.1);
+            color: var(--accent-purple);
+            padding: 0.4rem 0.9rem;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-family: 'Space Mono', monospace;
+            border: 1px solid rgba(183, 148, 246, 0.2);
+        }
+
+        /* Skills Section */
+        .skills-section {
+            margin-top: 6rem;
+            padding: 3rem 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(21, 26, 61, 0.5);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .skill-category h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 6rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <header>
+        <div class="hero-glow"></div>
+        <h1>BHARAT DHYANI</h1>
+        <p class="tagline">Lead Data Scientist | ML Engineer | LLM Specialist</p>
+        <div class="contact-links">
+            <a href="/cdn-cgi/l/email-protection#aeccc6cfdccfdacac6d7cfc0c79f9deec9c3cfc7c280cdc1c3">📧 Email</a>
+            <a href="https://www.linkedin.com/in/bharat-dhyani/" target="_blank">💼 LinkedIn</a>
+            <a href="https://github.com/yourusername" target="_blank">💻 GitHub</a>
+        </div>
+    </header>
+
+    <section class="stats-section">
+        <div class="stat-card">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Projects Delivered</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">95%</div>
+            <div class="stat-label">Model Accuracy</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">10K+</div>
+            <div class="stat-label">Daily API Calls</div>
+        </div>
+    </section>
+
+    <main>
+        <section>
+            <h2>Featured Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- Project 1: LLM Chat Application -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">🤖</div>
+                        </div>
+                        <h3 class="project-title">Enterprise LLM Chat Application</h3>
+                        <p class="project-company">@ Indium Software</p>
+                        <p class="project-description">
+                            Production-grade chat application powered by multiple LLMs with RAG architecture for intelligent document processing and querying.
+                        </p>
+                        <ul class="project-highlights">
+                            <li>Implemented multi-model support (GPT-4, Llama 2, Mistral)</li>
+                            <li>Built RAG pipeline for contracts, RFPs, and financial documents</li>
+                            <li>Achieved <95% retrieval accuracy with vector databases</li>
+                            <li>Handles 1000+ concurrent users</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">OpenAI API</span>
+                            <span class="tech-badge">LangChain</span>
+                            <span class="tech-badge">FAISS</span>
+                            <span class="tech-badge">ChromaDB</span>
+                            <span class="tech-badge">FastAPI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Agentic AI Pipeline -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">🎯</div>
+                        </div>
+                        <h3 class="project-title">Agentic RFP Proposal Generator</h3>
+                        <p class="project-company">@ Indium Software</p>
+                        <p class="project-description">
+                            Multi-agent system that autonomously extracts information from RFPs and generates tailored proposal documents.
+                        </p>
+                        <ul class="project-highlights">
+                            <li>Built with LangGraph, CrewAI, and AutoGen frameworks</li>
+                            <li>40% reduction in manual proposal creation time</li>
+                            <li>Automated entity extraction and document population</li>
+                            <li>Production deployment with FastAPI backend</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">LangGraph</span>
+                            <span class="tech-badge">CrewAI</span>
+                            <span class="tech-badge">AutoGen</span>
+                            <span class="tech-badge">FastAPI</span>
+                            <span class="tech-badge">AWS Lambda</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Neural Data Processing -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">🧠</div>
+                        </div>
+                        <h3 class="project-title">Olfaction Detection System</h3>
+                        <p class="project-company">@ Indium Software</p>
+                        <p class="project-description">
+                            Deep learning system for smell detection using neural spike data with applications in security and quality control.
+                        </p>
+                        <ul class="project-highlights">
+                            <li>Encoder-decoder architecture for neural signal processing</li>
+                            <li>87% classification accuracy on olfaction detection</li>
+                            <li>Real-time spike event analysis and visualization</li>
+                            <li>AWS SageMaker pipeline for 100GB+ daily data</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">PyTorch</span>
+                            <span class="tech-badge">AWS SageMaker</span>
+                            <span class="tech-badge">EC2</span>
+                            <span class="tech-badge">Lambda</span>
+                            <span class="tech-badge">Neural Networks</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Recommendation System -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">💡</div>
+                        </div>
+                        <h3 class="project-title">Investment Recommendation Engine</h3>
+                        <p class="project-company">@ Indium Software</p>
+                        <p class="project-description">
+                            Hybrid recommendation system providing personalized investment tips to high-net-worth individuals.
+                        </p>
+                        <ul class="project-highlights">
+                            <li>Combined content-based and collaborative filtering</li>
+                            <li>Matrix factorization (SVD, ALS) implementation</li>
+                            <li>78% recommendation acceptance rate</li>
+                            <li>50+ engineered behavioral features</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">scikit-learn</span>
+                            <span class="tech-badge">Matrix Factorization</span>
+                            <span class="tech-badge">K-means</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">AWS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: ANPR System -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">🚗</div>
+                        </div>
+                        <h3 class="project-title">Real-time ANPR on Edge Devices</h3>
+                        <p class="project-company">@ Guise.AI</p>
+                        <p class="project-description">
+                            High-performance license plate recognition system optimized for edge deployment with real-time processing.
+                        </p>
+                        <ul class="project-highlights">
+                            <li>>95% accuracy on NVIDIA Xavier and Jetson Nano</li>
+                            <li><100ms inference latency at 30 FPS</li>
+                            <li>TensorRT optimization for edge deployment</li>
+                            <li>Synthetic data generation improved mAP by 15%</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">YOLOv5</span>
+                            <span class="tech-badge">TensorRT</span>
+                            <span class="tech-badge">OpenCV</span>
+                            <span class="tech-badge">DeepSORT</span>
+                            <span class="tech-badge">Edge AI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: NLP-based Fraud Detection -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">🔍</div>
+                        </div>
+                        <h3 class="project-title">Intelligent CRM Chatbot & Fraud Detection</h3>
+                        <p class="project-company">@ Amdocs</p>
+                        <p class="project-description">
+                            NLP-powered chatbot for customer service with integrated fraud detection capabilities.
+                        </p>
+                        <ul class="project-highlights">
+                            <li>90% reduction in support tickets (1000+ to <100)</li>
+                            <li>Identified 7% fraudulent activities in historical data</li>
+                            <li>Real-time intent classification and response</li>
+                            <li>Power BI integration for analytics</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">NLP</span>
+                            <span class="tech-badge">Intent Classification</span>
+                            <span class="tech-badge">ML Models</span>
+                            <span class="tech-badge">Power BI</span>
+                            <span class="tech-badge">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills-section">
+            <h2>Technical Expertise</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>LLMs & Gen AI</h3>
+                    <ul class="skill-list">
+                        <li>OpenAI GPT-4, Llama 2, Mistral</li>
+                        <li>LangChain & LangGraph</li>
+                        <li>RAG Architectures</li>
+                        <li>CrewAI & AutoGen</li>
+                        <li>Prompt Engineering</li>
+                        <li>Fine-tuning & Quantization</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Deep Learning & CV</h3>
+                    <ul class="skill-list">
+                        <li>PyTorch & TensorFlow</li>
+                        <li>YOLO, ResNet, EfficientDet</li>
+                        <li>Object Detection & Tracking</li>
+                        <li>TensorRT Optimization</li>
+                        <li>Edge AI Deployment</li>
+                        <li>OCR & Document AI</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Cloud & MLOps</h3>
+                    <ul class="skill-list">
+                        <li>AWS (EC2, Lambda, SageMaker)</li>
+                        <li>Docker & Containerization</li>
+                        <li>CI/CD Pipelines</li>
+                        <li>Model Monitoring</li>
+                        <li>FastAPI & Flask</li>
+                        <li>Serverless Architecture</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Data & Databases</h3>
+                    <ul class="skill-list">
+                        <li>FAISS & ChromaDB</li>
+                        <li>Vector Databases</li>
+                        <li>MongoDB & PostgreSQL</li>
+                        <li>ETL Pipelines</li>
+                        <li>Pandas & NumPy</li>
+                        <li>Data Preprocessing</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Bharat Dhyani. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; color: rgba(160, 174, 192, 0.6);">
+            Built with passion for AI and Machine Learning
+        </p>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.project-card, .skill-category');
+        
+        const reveal = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('scroll-reveal', 'active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add hover effect to project cards
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+        });
+
+        // Dynamic stat counter animation
+        const statNumbers = document.querySelectorAll('.stat-number');
+        
+        const animateStats = () => {
+            statNumbers.forEach(stat => {
+                const value = stat.textContent;
+                if (value.includes('+')) {
+                    const number = parseInt(value);
+                    let current = 0;
+                    const increment = number / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= number) {
+                            stat.textContent = value;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current) + '+';
+                        }
+                    }, 50);
+                }
+            });
+        };
+
+        // Trigger stat a
