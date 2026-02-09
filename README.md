@@ -6,7 +6,7 @@
 
 ## 🚀 About Me
 
-Lead Data Scientist and ML Engineer with 5+ years of experience specializing in:
+Lead Data Scientist and ML Engineer with 6+ years of experience specializing in:
 - 🤖 Large Language Models (LLMs) & Gen AI
 - 👁️ Computer Vision & Edge AI
 - ☁️ Production ML Systems on AWS
